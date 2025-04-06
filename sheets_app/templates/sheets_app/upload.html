@@ -1,0 +1,76 @@
+{% extends 'sheets_app/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-cloud-upload text-primary me-2" style="font-size: 1.5rem;"></i>
+                    <h4 class="mb-0">Upload de Planilha</h4>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="bi bi-upload me-3"></i>
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer bg-light py-3">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-info-circle text-muted me-2"></i>
+                    <div class="text-muted small">
+                        <div>Formatos suportados: .xlsx, .xls, .csv</div>
+                        <div>Tamanho máximo: 5MB</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.form-control {
+    border: 1px solid #dee2e6;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-primary {
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-primary .bi {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-primary:hover .bi {
+    color: #ffffff;
+}
+
+.card-footer {
+    border-top: 1px solid rgba(0,0,0,.05);
+}
+</style>
+{% endblock %} 

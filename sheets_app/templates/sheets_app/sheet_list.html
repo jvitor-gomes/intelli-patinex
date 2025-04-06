@@ -1,0 +1,122 @@
+{% extends 'sheets_app/base.html' %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-table text-primary me-2"></i>
+                    <h5 class="mb-0">Abas da Planilha</h5>
+                </div>
+            </div>
+            <div class="list-group list-group-flush">
+                {% for sheet in sheets %}
+                    <a href="{% url 'view_sheet' spreadsheet.id sheet.name %}" 
+                       class="list-group-item list-group-item-action border-0 py-3 px-4">
+                        <i class="bi bi-file-earmark-spreadsheet me-2 text-muted"></i>
+                        {{ sheet.name }}
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="card-footer bg-light border-0 p-3">
+                <a href="{% url 'upload_spreadsheet' %}" class="btn btn-primary w-100">
+                    <i class="bi bi-cloud-upload me-2"></i>
+                    Upload Nova Planilha
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-info-circle text-primary me-2"></i>
+                    <h5 class="mb-0">Detalhes da Planilha</h5>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="detail-item">
+                            <label class="text-muted mb-1">Nome do arquivo</label>
+                            <p class="mb-0 fw-medium">{{ spreadsheet }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="detail-item">
+                            <label class="text-muted mb-1">Data de upload</label>
+                            <p class="mb-0 fw-medium">{{ spreadsheet.uploaded_at|date:"d/m/Y H:i" }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="detail-item">
+                            <label class="text-muted mb-1">Número de abas</label>
+                            <p class="mb-0 fw-medium">{{ sheets|length }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.list-group-item-action {
+    transition: background-color 0.2s ease;
+}
+
+.list-group-item-action:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-primary {
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 0 0.2rem rgba(146, 61, 221, 0.25);
+}
+
+.detail-item {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+.detail-item label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.detail-item p {
+    color: #2c3e50;
+}
+
+.fw-medium {
+    font-weight: 500;
+}
+
+.bi {
+    color: var(--primary-color);
+}
+
+.list-group-item-action .bi {
+    color: var(--primary-light);
+    transition: color 0.2s ease;
+}
+
+.list-group-item-action:hover .bi {
+    color: var(--primary-color);
+}
+
+.card-footer .bi {
+    color: white;
+}
+</style>
+{% endblock %} 
